@@ -18,7 +18,7 @@ const Cart = () => {
         <tbody>
           <tr>
             <td>
-              <img src={} alt="Tenis" />
+              <img src="" alt="Tenis" />
             </td>
             <td>
               <strong>Tenis novo</strong>
