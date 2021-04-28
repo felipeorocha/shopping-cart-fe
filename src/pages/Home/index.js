@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import { ProductList } from './styles';
 import { MdAddShoppingCart } from 'react-icons/md';
+import { currency } from '../../utils/currency';
 import api from '../../services/api';
 
 class Home extends Component {
@@ -10,7 +11,12 @@ class Home extends Component {
 
   async componentDidMount() {
     const { data } = await api.get('/products');
-    this.setState({ products: data });
+
+    const formatData = data.map(product => ({
+      ...product, priceFormatted: currency(product.price)
+    }));
+
+    this.setState({ products: formatData });
   }
 
   render() {
@@ -22,7 +28,7 @@ class Home extends Component {
             <li key={product.id}>
               <img src={product.image} alt={product.title} />
               <strong>{product.title}</strong>
-              <span>R$ {product.price}</span>
+              <span>{product.priceFormatted}</span>
       
               <button type="button">
                 <div>
