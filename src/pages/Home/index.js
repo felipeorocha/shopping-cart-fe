@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import { connect } from 'react-redux';
 import { ProductList } from './styles';
 import { MdAddShoppingCart } from 'react-icons/md';
 import { currency } from '../../utils/currency';
@@ -10,13 +11,22 @@ class Home extends Component {
   };
 
   async componentDidMount() {
-    const { data } = await api.get('/products');
+    const { data } = await api.get('products');
 
     const formatData = data.map(product => ({
       ...product, priceFormatted: currency(product.price)
     }));
 
     this.setState({ products: formatData });
+  }
+
+  handleAddProduct = product => {
+    const { dispatch } = this.props;
+
+    dispatch({ // when called dispatch, all reducers are triggered
+      type: 'ADD_TO_CART', // type
+      product, // payload
+    });
   }
 
   render() {
@@ -30,7 +40,7 @@ class Home extends Component {
               <strong>{product.title}</strong>
               <span>{product.priceFormatted}</span>
       
-              <button type="button">
+              <button type="button" onClick={() => this.handleAddProduct(product)}>
                 <div>
                   <MdAddShoppingCart size={16} color="#fff" /> 3
                 </div>
@@ -44,4 +54,4 @@ class Home extends Component {
   }
 }
 
-export default Home;
+export default connect()(Home);
