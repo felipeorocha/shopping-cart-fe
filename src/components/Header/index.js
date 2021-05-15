@@ -18,7 +18,7 @@ const Header = ({ cart }) => {
       <Cart to="/cart">
         <div>
           <strong>My cart</strong>
-          <span>3 items</span>
+          <span>{cart.length} {cart.length < 2 ? 'item' : 'itens'}</span>
         </div>
         <MdShoppingBasket size={36} color="#fff" />
       </Cart>
@@ -26,6 +26,8 @@ const Header = ({ cart }) => {
   );
 }
 
-export default connect(state => ({ // whenever a state within connect() method changes, the component will rerender too, just like setState() method
-  cart: state.cart // state.reducer_name
-}))(Header);
+const mapStateToProps = state => ({
+  cart: state.cart
+});
+
+export default connect(mapStateToProps)(Header);

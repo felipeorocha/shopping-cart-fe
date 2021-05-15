@@ -42,6 +42,10 @@ export const ProductTable = styled.table`
     border-bottom: 1px solid #eee;
   }
 
+  tbody tr:last-child td {
+    border: none;
+  } 
+
   img {
     height: 100px;
   }
@@ -63,6 +67,7 @@ export const ProductTable = styled.table`
     align-items: center;
 
     input {
+      text-align: center;
       border: 1px solid #ddd;
       border-radius: 4px;
       color: #666;
