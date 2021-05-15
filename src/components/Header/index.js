@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import { MdShoppingBasket } from 'react-icons/md'
 
@@ -6,7 +7,8 @@ import { Container, Cart } from "./styles";
 
 import Logo from '../Logo';
 
-const Header = () => {
+const Header = ({ cart }) => {
+  console.log("cart", cart)
   return (
     <Container>
       <Link to="/">
@@ -24,4 +26,6 @@ const Header = () => {
   );
 }
 
-export default Header;
+export default connect(state => ({ // whenever a state within connect() method changes, the component will rerender too, just like setState() method
+  cart: state.cart // state.reducer_name
+}))(Header);
