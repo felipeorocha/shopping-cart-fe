@@ -5,9 +5,12 @@ const cart = (state = [], action) => {
         ...action.product,
         quantity: 1
       }];
-    case 'UPDATE_CART':
-      return [...state, action.payload];
-  
+    case 'UPDATE_QUANTITY':
+      if (action.payload.quantity > 0) {
+        return state.map(item => item.id === action.payload.id ? { ...item, quantity: action.payload.quantity } : item)
+      } else {
+        return [...state]
+      }
     default:
       return state;
   }
