@@ -2,26 +2,20 @@ import { Component } from 'react';
 import { connect } from 'react-redux';
 import { MdRemoveCircleOutline, MdAddCircleOutline, MdDelete } from 'react-icons/md';
 
+import { currency } from '../../utils/currency';
+
 import { Container, ProductTable } from './styles';
 
 class Cart extends Component {
-
-  state = {
-    quantity: 0
-  };
-
-  handleUpdateQuantity = item => {
-    // console.log("A=>", productId);
+  
+  handleUpdateQuantity = product => {
     const { dispatch } = this.props;
 
-    console.log("x", item)
-    
     dispatch({
-      type: 'UPDATE_CART',
-      payload: { ...item, quantity: item.quantity + 1 }
+      type: 'UPDATE_QUANTITY',
+      payload: product
     });
   }
-
   
   render() {
     const { products } = this.props;
@@ -51,16 +45,16 @@ class Cart extends Component {
                   <td>
                     <div>
                       <button type="button">
-                        <MdRemoveCircleOutline size={20} color="#7159c1" />
+                        <MdRemoveCircleOutline size={20} color="#7159c1" onClick={() => this.handleUpdateQuantity({ id: product.id, quantity: product.quantity - 1 })} />
                       </button>
                       <input type="text" readOnly value={product.quantity} />
                       <button type="button">
-                        <MdAddCircleOutline size={20} color="#7159c1" onClick={() => this.handleUpdateQuantity(product)} />
+                        <MdAddCircleOutline size={20} color="#7159c1" onClick={() => this.handleUpdateQuantity({ id: product.id, quantity: product.quantity + 1 })} />
                       </button>
                     </div>
                   </td>
                   <td>
-                    <strong>R$ 258,80</strong>
+                    <strong>{currency(product.price * product.quantity)}</strong>
                   </td>
                   <td>
                     <button type="button">
