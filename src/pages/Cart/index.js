@@ -16,6 +16,15 @@ class Cart extends Component {
       payload: product
     });
   }
+
+  handleRemoveProduct = product => {
+    const { dispatch } = this.props;
+
+    dispatch({
+      type: 'REMOVE_FROM_CART',
+      payload: product
+    });
+  }
   
   render() {
     const { products } = this.props;
@@ -34,7 +43,7 @@ class Cart extends Component {
           </thead>
           <tbody>
             { products.map(product => (
-                <tr>
+                <tr key={product.id}>
                   <td>
                     <img src={product.image} alt="Tenis" />
                   </td>
@@ -58,7 +67,7 @@ class Cart extends Component {
                   </td>
                   <td>
                     <button type="button">
-                      <MdDelete size={20} color="#7159c1" />
+                      <MdDelete size={20} color="#7159c1" onClick={() => this.handleRemoveProduct(product.id)} />
                     </button>
                   </td>
                 </tr>
