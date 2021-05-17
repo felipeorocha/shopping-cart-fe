@@ -4,8 +4,8 @@ const Logo = () => {
     <svg xmlns="http://www.w3.org/2000/svg" width="276px" height="36px" viewBox="0 0 276 36" version="1.1">
         <title>Logo</title>
         <desc>Created with Sketch.</desc>
-        <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-            <g id="Home" transform="translate(-250.000000, -50.000000)" fill="#FFFFFF" fill-rule="nonzero">
+        <g id="Page-1" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
+            <g id="Home" transform="translate(-250.000000, -50.000000)" fill="#FFFFFF" fillRule="nonzero">
                 <g id="Logo" transform="translate(250.000000, 50.000000)">
                     <g id="noun_Running_1473810" transform="translate(224.890323, 0.000000)">
                         <g id="Group">
