@@ -23,14 +23,17 @@ class Home extends Component {
   handleAddProduct = product => {
     const { dispatch } = this.props;
 
-    dispatch({ // when called dispatch, all reducers are triggered
-      type: 'ADD_TO_CART', // type
-      product, // payload
+    dispatch({
+      type: 'ADD_TO_CART',
+      product,
     });
   }
 
   render() {
     const { products } = this.state;
+    const { productCart } = this.props;
+    const aux = productCart.map(item => ({ id: item.id, quantity: item.quantity }));
+    
     return (
       <ProductList>
         {
@@ -42,7 +45,7 @@ class Home extends Component {
       
               <button type="button" onClick={() => this.handleAddProduct(product)}>
                 <div>
-                  <MdAddShoppingCart size={16} color="#fff" /> 3
+                  <MdAddShoppingCart size={16} color="#fff" /> { aux.map(item => item.id === product.id ? item.quantity : null) }
                 </div>
                 <span>Add to cart</span>
               </button>
@@ -54,4 +57,8 @@ class Home extends Component {
   }
 }
 
-export default connect()(Home);
+const mapStateToProps = state => ({
+  productCart: state.cart
+});
+
+export default connect(mapStateToProps)(Home);
