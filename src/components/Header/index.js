@@ -8,7 +8,6 @@ import { Container, Cart } from "./styles";
 import Logo from '../Logo';
 
 const Header = ({ cart }) => {
-  console.log("cart", cart)
   return (
     <Container>
       <Link to="/">
