@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import * as CartActions from '../../store/modules/cart/actions';
 
 import { MdRemoveCircleOutline, MdAddCircleOutline, MdDelete } from 'react-icons/md';
@@ -11,15 +12,15 @@ import { Container, ProductTable } from './styles';
 class Cart extends Component {
   
   handleUpdateQuantity = product => {
-    const { dispatch } = this.props;
+    const { updateQuantity } = this.props;
 
-    dispatch(CartActions.updateQuantity(product));
+    updateQuantity(product);
   }
 
   handleRemoveProduct = product => {
-    const { dispatch } = this.props;
+    const { removeFromCart } = this.props;
 
-    dispatch(CartActions.removeFromCart(product));
+    removeFromCart(product);
   }
   
   render() {
@@ -79,4 +80,8 @@ const mapStateToProps = state => ({
   products: state.cart
 });
 
-export default connect(mapStateToProps)(Cart);
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators(CartActions, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Cart);
