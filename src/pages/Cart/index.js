@@ -1,5 +1,7 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
+import * as CartActions from '../../store/modules/cart/actions';
+
 import { MdRemoveCircleOutline, MdAddCircleOutline, MdDelete } from 'react-icons/md';
 
 import { currency } from '../../utils/currency';
@@ -11,19 +13,13 @@ class Cart extends Component {
   handleUpdateQuantity = product => {
     const { dispatch } = this.props;
 
-    dispatch({
-      type: 'UPDATE_QUANTITY',
-      payload: product
-    });
+    dispatch(CartActions.updateQuantity(product));
   }
 
   handleRemoveProduct = product => {
     const { dispatch } = this.props;
 
-    dispatch({
-      type: 'REMOVE_FROM_CART',
-      payload: product
-    });
+    dispatch(CartActions.removeFromCart(product));
   }
   
   render() {
