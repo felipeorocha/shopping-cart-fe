@@ -53,16 +53,24 @@ class Cart extends Component {
                   <td>
                     <div>
                       <button type="button">
-                        <MdRemoveCircleOutline size={20} color="#7159c1" onClick={() => this.handleUpdateQuantity({ id: product.id, quantity: product.quantity - 1 })} />
+                        <MdRemoveCircleOutline
+                          size={20}
+                          color="#7159c1"
+                          onClick={() => this.handleUpdateQuantity({ id: product.id, quantity: product.quantity - 1 })}
+                        />
                       </button>
                       <input type="text" readOnly value={product.quantity} />
                       <button type="button">
-                        <MdAddCircleOutline size={20} color="#7159c1" onClick={() => this.handleUpdateQuantity({ id: product.id, quantity: product.quantity + 1 })} />
+                        <MdAddCircleOutline
+                          size={20}
+                          color="#7159c1"
+                          onClick={() => this.handleUpdateQuantity({ id: product.id, quantity: product.quantity + 1 })}
+                        />
                       </button>
                     </div>
                   </td>
                   <td>
-                    <strong>{currency(product.price * product.quantity)}</strong>
+                    <strong>{product.subtotal}</strong>
                   </td>
                   <td>
                     <button type="button">
@@ -80,7 +88,10 @@ class Cart extends Component {
 }
 
 const mapStateToProps = state => ({
-  products: state.cart
+  products: state.cart.map(product => ({
+    ...product,
+    subtotal: currency(product.price * product.quantity)
+  }))
 });
 
 const mapDispatchToProps = dispatch => {
