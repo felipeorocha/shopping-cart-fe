@@ -72,11 +72,7 @@ class Cart extends Component {
                 </tr>
             )) }
           </tbody>
-          <span>
-            {
-              currency(this.getCartAmount(products))
-            }
-          </span>
+          <span>Total: { currency(this.getCartAmount(products)) }</span>
         </ProductTable>
       </Container>
     );
