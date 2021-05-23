@@ -22,6 +22,8 @@ class Cart extends Component {
 
     removeFromCart(product);
   }
+
+  getCartAmount = products => products.reduce((acc, cur) => acc + cur.price * cur.quantity, 0);
   
   render() {
     const { products } = this.props;
@@ -70,6 +72,11 @@ class Cart extends Component {
                 </tr>
             )) }
           </tbody>
+          <span>
+            {
+              currency(this.getCartAmount(products))
+            }
+          </span>
         </ProductTable>
       </Container>
     );
