@@ -22,11 +22,9 @@ class Cart extends Component {
 
     removeFromCart(product);
   }
-
-  getCartAmount = products => products.reduce((acc, cur) => acc + cur.price * cur.quantity, 0);
   
   render() {
-    const { products } = this.props;
+    const { products, total } = this.props;
 
     return (
       <Container>
@@ -80,7 +78,7 @@ class Cart extends Component {
                 </tr>
             )) }
           </tbody>
-          <span>Total: { currency(this.getCartAmount(products)) }</span>
+          <span>Total: {total}</span>
         </ProductTable>
       </Container>
     );
@@ -91,7 +89,8 @@ const mapStateToProps = state => ({
   products: state.cart.map(product => ({
     ...product,
     subtotal: currency(product.price * product.quantity)
-  }))
+  })),
+  total: currency(state.cart.reduce((acc, cur) => acc + cur.price * cur.quantity, 0))
 });
 
 const mapDispatchToProps = dispatch => {
